@@ -98,6 +98,33 @@ nav {
     opacity: 0.9;
 }
 
+.hero .tagline {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.hero .description {
+    font-size: 1.05rem;
+    max-width: 900px;
+    margin: 0 auto 1.5rem;
+    opacity: 0.9;
+    line-height: 1.8;
+}
+
+.hero .metrics {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+}
+
 .cta-buttons {
     display: flex;
     gap: 1rem;
@@ -210,12 +237,28 @@ section.hero {
 }
 
 .about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 3rem;
-    align-items: center;
-    max-width: 1200px;
+}
+
+.about-intro {
+    max-width: 900px;
     margin: 0 auto;
+}
+
+.about-intro h3 {
+    color: #4A4AF5;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.about-intro p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    color: #555;
 }
 
 .about-text h3 {
@@ -229,10 +272,53 @@ section.hero {
     line-height: 1.8;
 }
 
+.value-proposition {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8e9ff 100%);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border-left: 5px solid #4A4AF5;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.value-proposition h3 {
+    color: #1F1F4B;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.value-item {
+    margin-bottom: 2rem;
+}
+
+.value-item:last-child {
+    margin-bottom: 0;
+}
+
+.value-item h4 {
+    color: #4A4AF5;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.value-item p {
+    line-height: 1.8;
+    color: #555;
+}
+
 .stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 2rem auto 0;
 }
 
 .stat-card {
@@ -246,6 +332,7 @@ section.hero {
 
 .stat-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(74, 74, 245, 0.3);
 }
 
 .stat-number {
@@ -1130,12 +1217,50 @@ footer {
         font-size: 1.2rem;
     }
 
+    .hero .tagline {
+        font-size: 1.05rem;
+    }
+
+    .hero .description {
+        font-size: 0.95rem;
+    }
+
+    .hero .metrics {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
+    }
+
+    .about-intro h3 {
+        font-size: 1.5rem;
+    }
+
+    .about-intro p {
+        font-size: 1rem;
+    }
+
     .about-content {
         grid-template-columns: 1fr;
     }
 
     .stats {
         grid-template-columns: 1fr;
+    }
+
+    .value-proposition {
+        padding: 1.5rem;
+    }
+
+    .value-proposition h3 {
+        font-size: 1.4rem;
+    }
+
+    .value-item h4 {
+        font-size: 1.1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .section-title {
