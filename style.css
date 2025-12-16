@@ -197,6 +197,128 @@ section.hero {
     max-width: none;
 }
 
+/* Experience intro text for freelance section */
+.experience-intro {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.experience-intro a {
+    color: #4A4AF5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.experience-intro a:hover {
+    text-decoration: underline;
+}
+
+/* Freelance projects container */
+.freelance-projects {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid #B9B8FF;
+}
+
+.freelance-project {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.freelance-project:hover {
+    background: #e8e9ff;
+    transform: translateX(5px);
+}
+
+.freelance-project strong {
+    color: #4A4AF5;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+}
+
+.freelance-project p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Achievements section styling */
+.achievements {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8e9ff 100%);
+    border-radius: 10px;
+    border-left: 4px solid #4A4AF5;
+}
+
+.achievements > strong {
+    color: #1F1F4B;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.achievements ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+}
+
+.achievements li {
+    padding: 0.6rem 0;
+    padding-left: 2rem;
+    position: relative;
+    line-height: 1.6;
+    color: #555;
+}
+
+.achievements li:before {
+    content: "🏆";
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+}
+
+.achievements li strong {
+    color: #4A4AF5;
+    font-weight: 600;
+}
+
+/* Enhanced experience item spacing */
+.experience-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+}
+
+/* Ensure proper list styling in experience items */
+.experience-item > ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.experience-item > ul > li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.experience-item > ul > li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #4A4AF5;
+    font-weight: bold;
+}
+
+
 #projects {
     background: #ffffff;
     max-width: none;
@@ -1269,5 +1391,34 @@ footer {
 
     .process-grid {
         grid-template-columns: 1fr;
+    }
+
+    .freelance-projects {
+        padding-left: 0.5rem;
+        border-left-width: 2px;
+    }
+
+    .freelance-project {
+        padding: 0.8rem;
+    }
+
+    .freelance-project strong {
+        font-size: 1rem;
+    }
+
+    .achievements {
+        padding: 1rem;
+    }
+
+    .achievements > strong {
+        font-size: 1rem;
+    }
+
+    .achievements li {
+        padding-left: 1.8rem;
+    }
+
+    .achievements li:before {
+        font-size: 1rem;
     }
 }
