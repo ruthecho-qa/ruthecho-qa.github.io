@@ -433,6 +433,7 @@ section.hero {
     line-height: 1.8;
     font-size: 1.05rem;
     color: #555;
+    text-align: justify;
 }
 
 .about-text h3 {
@@ -444,6 +445,7 @@ section.hero {
 .about-text p {
     margin-bottom: 1rem;
     line-height: 1.8;
+    text-align: justify;
 }
 
 .value-proposition {
@@ -1186,7 +1188,34 @@ section.hero {
     padding-left: 0;
 }
 
-.modal-section li {
+.modal-section ol {
+    list-style-type: none;
+    list-style-position: inside;
+    padding-left: 0;
+    counter-reset: item;
+}
+
+.modal-section ol li {
+    counter-increment: item;
+    padding: 0.8rem 0;
+    padding-left: 1.5rem;
+    line-height: 1.6;
+    color: #555;
+    border-left: 3px solid #4A4AF5;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.modal-section ol li:before {
+    content: counter(item) ".";
+    position: absolute;
+    left: 0.5rem;
+    color: #4A4AF5;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.modal-section ul li {
     padding: 0.8rem 0;
     padding-left: 2rem;
     position: relative;
@@ -1196,7 +1225,7 @@ section.hero {
     margin-bottom: 0.5rem;
 }
 
-.modal-section li:before {
+.modal-section ul li:before {
     content: "✓";
     position: absolute;
     left: 0.5rem;
