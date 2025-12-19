@@ -251,7 +251,7 @@ Looking to establish a solid QA foundation for your product? Want to discuss how
 
 ## 📄 License
 
-© 2024 Ruth Echo G. All rights reserved.
+© 2025 Ruth Echo G. All rights reserved.
 
 ---
 
