@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Images Collection Helper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #4A4AF5;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        .intro {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .project-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8e9ff 100%);
+            border-left: 5px solid #4A4AF5;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .project-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(74, 74, 245, 0.2);
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .project-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1F1F4B;
+        }
+        .project-icon {
+            font-size: 2rem;
+        }
+        .filename {
+            background: #4A4AF5;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        .links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .link-btn {
+            background: #4A4AF5;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .link-btn:hover {
+            background: #3939D5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 74, 245, 0.4);
+        }
+        .easy-badge {
+            background: #4ade80;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+        .instructions ol {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+            color: #856404;
+        }
+        .checklist {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+        .checklist h3 {
+            color: #0c5460;
+            margin-bottom: 0.5rem;
+        }
+        .checklist-item {
+            padding: 0.3rem 0;
+            color: #0c5460;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Project Images Collection Helper</h1>
+        <p class="intro">
+            Collect screenshots for your 6 Featured Projects. Click the links below to visit app stores or websites,
+            then save the screenshots with the exact filenames shown.
+        </p>
+
+        <!-- DOOgether -->
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <span class="project-icon">🏋️</span>
+                    <span class="project-name">DOOgether</span>
+                    <span class="easy-badge">EASIEST - START HERE!</span>
+                </div>
+            </div>
+            <div class="filename">doogether.jpg</div>
+            <p style="color: #555; margin-bottom: 0.5rem;">Fitness & wellness app - Get from app store screenshots</p>
+            <div class="links">
+                <a href="https://play.google.com/store/apps/details?id=com.doogether.android&hl=en" class="link-btn" target="_blank">
+                    📱 Google Play Store
+                </a>
+                <a href="https://apps.apple.com/us/app/doogether-workouts-and-food/id1202750774" class="link-btn" target="_blank">
+                    🍎 App Store
+                </a>
+                <a href="https://doogether.id" class="link-btn" target="_blank">
+                    🌐 Website
+                </a>
+            </div>
+        </div>
+
+        <!-- KYZN -->
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <span class="project-icon">🏃‍♀️</span>
+                    <span class="project-name">KYZN</span>
+                    <span class="easy-badge">EASY</span>
+                </div>
+            </div>
+            <div class="filename">kyzn.jpg</div>
+            <p style="color: #555; margin-bottom: 0.5rem;">Lifestyle center platform - Get from app store</p>
+            <div class="links">
+                <a href="https://play.google.com/store/apps/details?id=com.kyzn.kyznapps&hl=en_US" class="link-btn" target="_blank">
+                    📱 Google Play Store
+                </a>
+                <a href="https://apps.apple.com/us/app/kyzn/id1596314646" class="link-btn" target="_blank">
+                    🍎 App Store
+                </a>
+                <a href="https://kyzn.life" class="link-btn" target="_blank">
+                    🌐 Website
+                </a>
+            </div>
+        </div>
+
+        <!-- Hijra Taaruf -->
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <span class="project-icon">💑</span>
+                    <span class="project-name">Hijra Taaruf</span>
+                    <span class="easy-badge">EASY</span>
+                </div>
+            </div>
+            <div class="filename">hijra-taaruf.jpg</div>
+            <p style="color: #555; margin-bottom: 0.5rem;">Muslim dating app - Get from app store (choose interface screenshots, not user photos)</p>
+            <div class="links">
+                <a href="https://play.google.com/store/apps/details?id=com.app.hijra.taaruf&hl=en_GB" class="link-btn" target="_blank">
+                    📱 Google Play Store
+                </a>
+                <a href="https://apps.apple.com/us/app/hijra-taaruf-muslim-dating/id1601823803" class="link-btn" target="_blank">
+                    🍎 App Store
+                </a>
+                <a href="https://hijrataaruf.com" class="link-btn" target="_blank">
+                    🌐 Website
+                </a>
+            </div>
+        </div>
+
+        <!-- Vyond -->
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <span class="project-icon">🎬</span>
+                    <span class="project-name">Vyond</span>
+                </div>
+            </div>
+            <div class="filename">vyond.jpg</div>
+            <p style="color: #555; margin-bottom: 0.5rem;">SaaS animation platform - Visit website or review sites</p>
+            <div class="links">
+                <a href="https://www.vyond.com" class="link-btn" target="_blank">
+                    🌐 Official Website
+                </a>
+                <a href="https://www.pixelgenio.com/vyond-review/" class="link-btn" target="_blank">
+                    📰 Review Site
+                </a>
+                <a href="https://goanimate.miraheze.org/wiki/Vyond_Studio" class="link-btn" target="_blank">
+                    📚 Wiki
+                </a>
+            </div>
+        </div>
+
+        <!-- KlikBCA -->
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <span class="project-icon">🏦</span>
+                    <span class="project-name">KlikBCA Bisnis</span>
+                </div>
+            </div>
+            <div class="filename">klikbca.jpg</div>
+            <p style="color: #555; margin-bottom: 0.5rem;">Corporate banking - Visit tutorial or search Google Images</p>
+            <div class="links">
+                <a href="https://www.klikbca.com/kbbdemo/tutorial/01-01.html" class="link-btn" target="_blank">
+                    📚 Tutorial
+                </a>
+                <a href="https://www.bca.co.id/en/bisnis/layanan/e-banking-bisnis/klikbca-bisnis" class="link-btn" target="_blank">
+                    🌐 BCA Official
+                </a>
+                <a href="https://www.google.com/search?q=KlikBCA+Bisnis+interface+screenshot&tbm=isch" class="link-btn" target="_blank">
+                    🔍 Google Images
+                </a>
+            </div>
+        </div>
+
+        <!-- PARSEL -->
+        <div class="project-card">
+            <div class="project-header">
+                <div>
+                    <span class="project-icon">🚛</span>
+                    <span class="project-name">PARSEL</span>
+                </div>
+            </div>
+            <div class="filename">parsel.jpg</div>
+            <p style="color: #555; margin-bottom: 0.5rem;">Fleet management - Use generic SAP fleet management screenshot</p>
+            <div class="links">
+                <a href="https://www.google.com/search?q=SAP+Fiori+fleet+management+dashboard&tbm=isch" class="link-btn" target="_blank">
+                    🔍 Google Images
+                </a>
+                <a href="https://www.sodalessolutions.com/sap-fiori-based-fleet-management-app-to-help-you-manage-monitor-and-track-your-fleets-performance-real-time/" class="link-btn" target="_blank">
+                    📰 SAP Fleet Example
+                </a>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>📝 Quick Instructions:</h3>
+            <ol>
+                <li>Click the app store links (easiest for DOOgether, KYZN, Hijra Taaruf)</li>
+                <li>Scroll to screenshot section on the store page</li>
+                <li>Right-click on image → "Save image as..." OR take a screenshot</li>
+                <li>Save with the exact filename shown (e.g., "doogether.jpg")</li>
+                <li>Compress if needed at <a href="https://tinypng.com" target="_blank" style="color: #856404; font-weight: bold;">TinyPNG.com</a></li>
+                <li>Place all images in: <code>assets/images/projects/</code></li>
+            </ol>
+        </div>
+
+        <div class="checklist">
+            <h3>✅ Checklist:</h3>
+            <div class="checklist-item">☐ doogether.jpg</div>
+            <div class="checklist-item">☐ kyzn.jpg</div>
+            <div class="checklist-item">☐ hijra-taaruf.jpg</div>
+            <div class="checklist-item">☐ vyond.jpg</div>
+            <div class="checklist-item">☐ klikbca.jpg</div>
+            <div class="checklist-item">☐ parsel.jpg</div>
+        </div>
+
+        <div class="footer">
+            💡 Tip: Start with the "EASY" ones first! App stores have the best quality screenshots.<br>
+            Need help? Check <code>PROJECT_IMAGES_COLLECTION_GUIDE.md</code> for detailed instructions.
+        </div>
+    </div>
+</body>
+</html>

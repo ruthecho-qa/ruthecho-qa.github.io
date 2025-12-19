@@ -261,3 +261,95 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+// Project image zoom functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const projectImages = document.querySelectorAll('.project-image img');
+
+    projectImages.forEach(img => {
+        // Make image clickable
+        img.style.cursor = 'pointer';
+        img.title = 'Click to zoom';
+
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Get project name from card
+            const projectCard = this.closest('.project-card');
+            const projectName = projectCard.querySelector('h3').textContent;
+            const imageSrc = this.getAttribute('src');
+
+            // Open lightbox with actual image
+            openProjectImageLightbox(imageSrc, projectName);
+        });
+    });
+});
+
+// Function to open project images in lightbox
+function openProjectImageLightbox(imageSrc, projectName) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxText = document.getElementById('lightbox-text');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    // Clear existing content
+    lightboxImage.innerHTML = '';
+
+    // Create wrapper for zoom control
+    const imgWrapper = document.createElement('div');
+    imgWrapper.style.maxWidth = '95vw';
+    imgWrapper.style.maxHeight = '90vh';
+    imgWrapper.style.display = 'flex';
+    imgWrapper.style.alignItems = 'center';
+    imgWrapper.style.justifyContent = 'center';
+    imgWrapper.style.overflow = 'auto';
+
+    // Create and add actual image
+    const img = document.createElement('img');
+    img.src = imageSrc;
+    img.alt = projectName;
+    img.style.minWidth = '150%'; // Ensure at least 150% zoom
+    img.style.width = 'auto';
+    img.style.height = 'auto';
+    img.style.maxWidth = 'none';
+    img.style.objectFit = 'contain';
+    img.style.borderRadius = '10px';
+    img.style.boxShadow = '0 10px 40px rgba(0,0,0,0.3)';
+    img.style.cursor = 'zoom-in';
+
+    // Load image and set proper size
+    img.onload = function() {
+        // Calculate dimensions for at least 150% zoom
+        const naturalWidth = this.naturalWidth;
+        const naturalHeight = this.naturalHeight;
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        // Set to at least 150% of viewport or natural size, whichever is larger
+        const targetWidth = Math.max(naturalWidth, viewportWidth * 1.5);
+        img.style.width = targetWidth + 'px';
+        img.style.maxWidth = 'none';
+    };
+
+    imgWrapper.appendChild(img);
+    lightboxImage.appendChild(imgWrapper);
+
+    // Update text
+    lightboxText.textContent = projectName;
+    lightboxCaption.textContent = 'Project Screenshot - Scroll to view full image';
+
+    // Hide the icon placeholders
+    const lightboxIcon = document.getElementById('lightbox-icon');
+    if (lightboxIcon) lightboxIcon.style.display = 'none';
+
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Track zoom event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'project_image_zoom', {
+            'project_name': projectName
+        });
+    }
+}
