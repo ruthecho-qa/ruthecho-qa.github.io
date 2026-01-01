@@ -1,3 +1,217 @@
+// Cookie Consent Management
+const CookieConsent = {
+    COOKIE_NAME: 'portfolio_cookie_consent',
+    COOKIE_EXPIRY_DAYS: 365,
+
+    getCookie: function(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    },
+
+    setCookie: function(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = `expires=${date.toUTCString()}`;
+        document.cookie = `${name}=${value};${expires};path=/;SameSite=Lax`;
+    },
+
+    hasConsent: function() {
+        return this.getCookie(this.COOKIE_NAME) === 'accepted';
+    },
+
+    giveConsent: function() {
+        this.setCookie(this.COOKIE_NAME, 'accepted', this.COOKIE_EXPIRY_DAYS);
+        this.enableAnalytics();
+    },
+
+    denyConsent: function() {
+        this.setCookie(this.COOKIE_NAME, 'declined', this.COOKIE_EXPIRY_DAYS);
+        this.disableAnalytics();
+    },
+
+    enableAnalytics: function() {
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+            });
+
+            // Track consent given event
+            gtag('event', 'cookie_consent_granted');
+
+            // Initialize tracking now that consent is given
+            initializeTracking();
+        }
+    },
+
+    disableAnalytics: function() {
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+                'analytics_storage': 'denied'
+            });
+
+            // Track consent denied event (without storing data)
+            gtag('event', 'cookie_consent_denied');
+        }
+    },
+
+    showBanner: function() {
+        const banner = document.getElementById('cookie-consent');
+        if (banner) {
+            setTimeout(() => {
+                banner.classList.add('show');
+            }, 1000);
+        }
+    },
+
+    hideBanner: function() {
+        const banner = document.getElementById('cookie-consent');
+        if (banner) {
+            banner.classList.remove('show');
+        }
+    }
+};
+
+// Initialize Cookie Consent on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const consentStatus = CookieConsent.getCookie(CookieConsent.COOKIE_NAME);
+
+    if (consentStatus === null) {
+        // No consent preference set, show banner
+        CookieConsent.showBanner();
+
+        // Set default consent to denied until user accepts
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'default', {
+                'analytics_storage': 'denied'
+            });
+        }
+    } else if (consentStatus === 'accepted') {
+        // User has previously accepted
+        CookieConsent.enableAnalytics();
+    } else {
+        // User has previously declined
+        CookieConsent.disableAnalytics();
+    }
+
+    // Handle Accept button
+    const acceptBtn = document.getElementById('cookie-accept');
+    if (acceptBtn) {
+        acceptBtn.addEventListener('click', function() {
+            CookieConsent.giveConsent();
+            CookieConsent.hideBanner();
+        });
+    }
+
+    // Handle Decline button
+    const declineBtn = document.getElementById('cookie-decline');
+    if (declineBtn) {
+        declineBtn.addEventListener('click', function() {
+            CookieConsent.denyConsent();
+            CookieConsent.hideBanner();
+        });
+    }
+});
+
+// Initialize all tracking (only called after consent)
+function initializeTracking() {
+    // Track Traffic Source
+    if (typeof gtag !== 'undefined') {
+        const referrer = document.referrer;
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Track referrer source
+        if (referrer) {
+            const referrerDomain = new URL(referrer).hostname;
+            gtag('event', 'traffic_source', {
+                'source_type': 'referral',
+                'referrer_domain': referrerDomain,
+                'referrer_url': referrer
+            });
+        } else if (urlParams.has('utm_source')) {
+            // Track UTM parameters if present
+            gtag('event', 'traffic_source', {
+                'source_type': 'utm_campaign',
+                'utm_source': urlParams.get('utm_source'),
+                'utm_medium': urlParams.get('utm_medium'),
+                'utm_campaign': urlParams.get('utm_campaign')
+            });
+        } else {
+            // Direct traffic
+            gtag('event', 'traffic_source', {
+                'source_type': 'direct'
+            });
+        }
+    }
+}
+
+// Track Time Spent on Sections
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('section[id]');
+    const sectionTimes = {};
+
+    sections.forEach(section => {
+        const sectionId = section.id;
+        sectionTimes[sectionId] = {
+            startTime: null,
+            totalTime: 0,
+            isVisible: false
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Section became visible
+                    sectionTimes[sectionId].startTime = Date.now();
+                    sectionTimes[sectionId].isVisible = true;
+                } else if (sectionTimes[sectionId].isVisible) {
+                    // Section became invisible
+                    const timeSpent = Date.now() - sectionTimes[sectionId].startTime;
+                    sectionTimes[sectionId].totalTime += timeSpent;
+                    sectionTimes[sectionId].isVisible = false;
+
+                    // Track time spent (only if more than 2 seconds)
+                    if (timeSpent > 2000 && typeof gtag !== 'undefined') {
+                        gtag('event', 'section_time', {
+                            'section_name': sectionId,
+                            'time_spent_seconds': Math.round(timeSpent / 1000),
+                            'total_time_seconds': Math.round(sectionTimes[sectionId].totalTime / 1000)
+                        });
+                    }
+                }
+            });
+        }, {
+            threshold: 0.5,  // Section is considered visible when 50% is in viewport
+            rootMargin: '-50px'  // Add some margin to avoid false positives
+        });
+
+        observer.observe(section);
+    });
+
+    // Track total time on page before user leaves
+    window.addEventListener('beforeunload', function() {
+        if (typeof gtag !== 'undefined') {
+            // Calculate total session time
+            const sessionTime = Date.now() - performance.timing.navigationStart;
+
+            gtag('event', 'session_summary', {
+                'total_session_seconds': Math.round(sessionTime / 1000)
+            });
+
+            // Send section time summary
+            Object.keys(sectionTimes).forEach(sectionId => {
+                if (sectionTimes[sectionId].totalTime > 0) {
+                    gtag('event', 'session_section_summary', {
+                        'section_name': sectionId,
+                        'total_time_seconds': Math.round(sectionTimes[sectionId].totalTime / 1000)
+                    });
+                }
+            });
+        }
+    });
+});
+
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
@@ -284,6 +498,37 @@ document.addEventListener('DOMContentLoaded', function() {
             openProjectImageLightbox(imageSrc, projectName);
         });
     });
+});
+
+// Back to Top Button functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.getElementById('back-to-top');
+
+    if (backToTopButton) {
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top when clicked
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            // Track back to top clicks
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'back_to_top_click', {
+                    'scroll_position': window.pageYOffset
+                });
+            }
+        });
+    }
 });
 
 // Function to open project images in lightbox
